@@ -20,6 +20,7 @@ class Game(object):
         self.arena = Board(Game.DEFAULT)
         self.curr_pos = Game.START[:]
         self.prev_pos = Game.START[:]
+        self.arena[0][4] = Game.MARKER_G
         self.move_player()
 
     def move_player(self):
@@ -28,7 +29,7 @@ class Game(object):
         if (-1 < cx < 5) and (-1 < cy < 5):
             self.arena[py][px] = Game.MARKER_O
             self.arena[cy][cx] = Game.MARKER_X
-            self.arena[0][4] = Game.MARKER_G
+            # self.arena[0][4] = Game.MARKER_G
             # print(self.curr_pos)
             print(str(self.arena))
             print(" ")
@@ -40,22 +41,27 @@ class Game(object):
     def play(self):
         print("You are: \nX")
         while self.flag:
-            if not self.curr_pos==Game.GOAL:
+            if self.curr_pos!=Game.GOAL:
                 print(self.curr_pos)
+                print (Game.GOAL)
                 self.prev_pos = self.curr_pos[:]
                 self.curr_pos[1]= self.curr_pos[1]-1
                 self.move_player()
             if self.curr_pos[1]==0:
                 print("we've reached the top")
                 print(self.curr_pos)
-            #     self.prev_pos = self.curr_pos[:]
-            #     self.curr_pos[0] = self.curr_pos[0] + 1
-            #     self.move_player()
+                self.prev_pos = self.curr_pos[:]
+                self.curr_pos[0] = self.curr_pos[0] + 1
+                self.move_player()
+            if self.curr_pos[0]==4:
+                if self.curr_pos==Game.GOAL:
+
+
                 # elif self.curr_pos[1]==4:
                 #     pass
             # else:
-            #     print("You've reached the goal!")
-                self.flag=False
+                    print("You've reached the goal!")
+                    self.flag=False
 
     def printArena(self):
         print(str(self.arena))
