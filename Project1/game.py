@@ -5,7 +5,6 @@ class Board(list):
     def __str__(self):
         return "\n".join(" ".join(row) for row in self)
 
-
 class Game(object):
 
     MARKER_X = "X"
@@ -14,6 +13,7 @@ class Game(object):
     START = [0, 4]
     GOAL = [4, 0]
     DEFAULT = [["O"] * 5 for _ in range(5)]
+    count = 0
 
     def __init__(self):
         self.flag = True
@@ -41,9 +41,11 @@ class Game(object):
     def play(self):
         print("You are: \nX")
         while self.flag:
+            Game.count+=1
             if self.curr_pos!=Game.GOAL:
                 print(self.curr_pos)
                 print (Game.GOAL)
+                #dont need this if in linked list
                 self.prev_pos = self.curr_pos[:]
                 self.curr_pos[1]= self.curr_pos[1]-1
                 self.move_player()
@@ -61,6 +63,8 @@ class Game(object):
                 #     pass
             # else:
                     print("You've reached the goal!")
+                    Game.count+=1
+                    print(Game.count)
                     self.flag=False
 
     def printArena(self):
