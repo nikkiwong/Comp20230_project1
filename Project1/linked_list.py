@@ -69,3 +69,6 @@ l.add_tail(Node(67))
 l.add_head(Node("head"))
 l.add_tail(Node("tail"))
 print(l)
+
+
+#if you add to the stack then the first element is at the bottom.. but you always have the head pointer at the top element in the stack. and then pop by removing the head element.

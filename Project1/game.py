@@ -12,12 +12,16 @@ class Game(object):
     MARKER_O = "O"
     START = [0, 4]
     GOAL = [4, 0]
-    DEFAULT = [["O"] * 5 for _ in range(5)]
+    default = [["O"] * 5 for _ in range (5)]
     count = 0
+
+    def size(self, n):
+        self.n=n
+        return self.n
 
     def __init__(self):
         self.flag = True
-        self.arena = Board(Game.DEFAULT)
+        self.arena = Board(Game.default)
         self.curr_pos = Game.START[:]
         self.prev_pos = Game.START[:]
         self.arena[0][4] = Game.MARKER_G
@@ -46,22 +50,16 @@ class Game(object):
                 print(self.curr_pos)
                 print (Game.GOAL)
                 #dont need this if in linked list
+            # if self.curr_pos[1]== 4:
                 self.prev_pos = self.curr_pos[:]
                 self.curr_pos[1]= self.curr_pos[1]-1
                 self.move_player()
             if self.curr_pos[1]==0:
-                print("we've reached the top")
-                print(self.curr_pos)
                 self.prev_pos = self.curr_pos[:]
                 self.curr_pos[0] = self.curr_pos[0] + 1
                 self.move_player()
             if self.curr_pos[0]==4:
                 if self.curr_pos==Game.GOAL:
-
-
-                # elif self.curr_pos[1]==4:
-                #     pass
-            # else:
                     print("You've reached the goal!")
                     Game.count+=1
                     print(Game.count)

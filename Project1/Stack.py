@@ -13,6 +13,12 @@ class Node(object):
     def get_next(self):
         return self.__next
 
+    def get_value(self):
+        return self.__value
+
+    def __repr__(self):
+        return "node: " + str(self.get_value())
+
 class LinkedList(object):
     """ The List itself
     """
@@ -72,9 +78,23 @@ class Stack:
 
 
 s = Stack()
-s.push("Hello")
-s.push(776)
-s.push("muli difel")
+s.push("GO north")
+
+s.push("Go North")
+s.push("Go north")
+s.push("go NOrth")
+s.pop() # ater you pop, you mark the cell to show you've been there?
+s.push("go east")
+s.push("go east")
 s.pop()
+s.push("go south")
+s.push("go south")
+s.push("go south")
+s.push("go south")
+s.pop()
+s.pop()
+s.pop()
+
+# s.pop()
 print (s.isEmpty())
 print(s)
