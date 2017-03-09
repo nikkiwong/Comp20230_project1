@@ -21,17 +21,17 @@ class Game(object):
     default[6][2] = "*"
     default[7][2] = "*"
     GOAL = [7, 0]
-    START = [0, 2]
+    START = [0, 7]
+    PREV = [0, 7]
     count = 0
     sa = Stack()
 
 
     def __init__(self):
         self.flag = True
-        self.prev = Game.START
+        self.prev = Game.PREV
         self.goal = Game.GOAL
         self.r2d2 = Game.START
-        #wall
         self.arena = np.array(Game.default)
         self.find_path()
 
@@ -42,7 +42,7 @@ class Game(object):
         return self.r2d2
 
     def is_feasible(self, x, y):
-        print self.arena[x][y]
+        # print self.arena[x][y]
         if self.arena[x][y] == "*" or self.arena[x][y] == "V" or self.arena[x][y] == 1:
             print("We have hit a wall")
             print("return false")
@@ -54,12 +54,16 @@ class Game(object):
             print("Return false")
 
     def move_robot(self):
+        # #get oo-ordinates for the goal, previous position and the robots position
         gx, gy = self.goal
-        px, py = self.prev
         cx, cy = self.r2d2
-        # self.r2d2[0]+=1
-        # self.r2d2[1]+=1
-        print(self.r2d2)
+        Game.sa.push([cx, cy])
+        px, py = Game.sa.peek()
+
+        print("previous: ", px, py)
+
+        print("robot: ", self.r2d2)
+
         if (-1 < cx < Game.size) and (-1 < cy < Game.size):
             if self.arena[cy][cx] == "O":
                 self.arena[py][px] = Game.MARKER_1
@@ -68,31 +72,37 @@ class Game(object):
                 self.arena[cy][cx] = Game.MARKER_X
                 print(str(self.arena))
                 print(" ")
-                print(Game.sa)
+                Game.sa
+                Game.sa.peek()
+
         else:
-            self.top = Game.sa.top()
-            bx, by = self.top
-            print("Game top: ", self.top)
+            top = Game.sa.top()
+            bx, by = top
+            print("Game top: ", top)
             self.arena[by][bx] = Game.MARKER_V
             Game.sa.pop()
-            self.r2d2 = Game.sa.top()
-            print(self.r2d2)
+            cx, cy = Game.sa.top()
+            print("robot", cx, cy)
             # self.move_robot()
 
     def find_path(self):
-        Game.sa.push(self.r2d2)
+
         self.move_robot()
+
         self.is_feasible(self.r2d2[1], self.r2d2[0])
         self.r2d2[1] = self.r2d2[1]-1
-        Game.sa.push(self.r2d2)
+        # print(self.r2d2)
+
         self.move_robot()
+
         self.is_feasible(self.r2d2[1], self.r2d2[0])
         self.r2d2[1] = self.r2d2[1]-1
-        Game.sa.push(self.r2d2)
+
         self.move_robot()
+
         self.is_feasible(self.r2d2[1], self.r2d2[0])
         self.r2d2[1] = self.r2d2[1]-1
-        Game.sa.push(self.r2d2)
+
         self.move_robot()
         # if self.r2d2 == self.goal:
         #     print("You have found the goal")

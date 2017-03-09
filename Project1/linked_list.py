@@ -60,6 +60,25 @@ class LinkedList(object):
             result += " -> " + str(current)
             current = current.get_next()
         return result
+
+        # Returns data at given index in linked list
+    def getNth(self, index):
+        current = self.__first  # Initialise temp
+        print(current)
+        count = 0  # Index of current node
+        # Loop while end of linked list is not reached
+        while (current):
+            if (count == index):
+                result = current
+                print(result)
+                return result
+            count += 1
+            current = current.get_next()
+        # if we get to this line, the caller was asking
+        # for a non-existent element so we assert fail
+        assert (False)
+        return 0
+
 # Tests    
 l = LinkedList()
 l.add_head(Node("toto"))
@@ -69,6 +88,8 @@ l.add_tail(Node(67))
 l.add_head(Node("head"))
 l.add_tail(Node("tail"))
 print(l)
+nth = l.getNth(4)
 
+print(nth)
 
 #if you add to the stack then the first element is at the bottom.. but you always have the head pointer at the top element in the stack. and then pop by removing the head element.

@@ -51,6 +51,22 @@ class LinkedList(object):
             current = current.get_next()
         return result
 
+    def getNth(self, index):
+        current = self.__first  # Initialise temp
+        if current == None:
+            return []
+        else:
+            count = 0  # Index of current node
+            # Loop while end of linked list is not reached
+            while (current):
+                if (count == index):
+                    result = current
+                    print(result)
+                    return result
+                count += 1
+                current = current.get_next()
+            return self.__first
+
 
 class Stack:
     def __init__(self):
@@ -59,7 +75,7 @@ class Stack:
         self.__size = 0
 
     def isEmpty(self):
-        return self.__list == 0
+        return self.__size == 0
 
     def push(self, e):
         self.elem = Node(e)
@@ -90,32 +106,37 @@ class Stack:
         else:
             return self.__list.head()
 
-
-s = Stack()
-s.push([0, 7])
-
-s.push("Go North")
-s.push("Go north")
-s.push("go NOrth")
-s.pop() # ater you pop, you mark the cell to show you've been there?
-s.push("go east")
-s.push("go east")
-s.pop()
-s.push("go south")
-s.push("go south")
-s.push("go south")
-s.push("go south")
-s.pop()
-s.pop()
+    def peek(self):
+        #peeks at the 2nd node in the linked list
+        return self.__list.getNth(1)
+#
+#
+# s = Stack()
+# s.push([0, 7])
+#
+# s.push("Go North")
+# s.push("Go north")
+# s.push("go NOrth")
+# s.pop() # ater you pop, you mark the cell to show you've been there?
+# s.push("go east")
+# s.push("go east")
+# s.pop()
+# s.push("go south")
+# s.push("go south")
+# s.push("go south")
+# s.push("go south")
 # s.pop()
 # s.pop()
 # s.pop()
 # s.pop()
 # s.pop()
 # s.pop()
-
-print(s.top())
-
 # s.pop()
-print (s.isEmpty())
-print(s)
+# s.pop()
+# #
+# print(s.top())
+#
+# # s.pop()
+# print (s.isEmpty())
+# # print(s)
+# print(s.peek())
