@@ -7,6 +7,9 @@ class Node(object):
         self.__value = value
         self.__next = None
 
+    def __getitem__(self, index):
+        return self.__value[index]
+
     def set_next(self, next):
         self.__next = next
 
@@ -17,7 +20,8 @@ class Node(object):
         return self.__value
 
     def __repr__(self):
-        return "node: " + str(self.get_value())
+        return str(self.get_value())
+        # return "node: " + str(self.get_value())
 
 class LinkedList(object):
     """ The List itself
@@ -58,17 +62,21 @@ class Stack:
         return self.__list == 0
 
     def push(self, e):
-        elem = Node(e)
-        self.__list.add_head(elem)
-        self.__topPointer = elem
+        self.elem = Node(e)
+        self.__list.add_head(self.elem)
+        self.__topPointer = self.elem
         self.__size += 1
         # new_node = Node(value)
         # new_node.set_next(self.__topPointer)
         # self.__topPointer = new_node
 
     def pop(self):
-        self.__size -= 1
-        return self.__list.remove_head()
+        if self.__size == 0:
+            self.__list = None
+            return []
+        else:
+            self.__size -= 1
+            return self.__list.remove_head()
 
     def size(self):
         return self.__size
@@ -76,9 +84,15 @@ class Stack:
     def __repr__(self):
         return self.__list.__repr__()
 
+    def top(self):
+        if self.__size == 0:
+            return []
+        else:
+            return self.__list.head()
+
 
 s = Stack()
-s.push("GO north")
+s.push([0, 7])
 
 s.push("Go North")
 s.push("Go north")
@@ -93,7 +107,14 @@ s.push("go south")
 s.push("go south")
 s.pop()
 s.pop()
-s.pop()
+# s.pop()
+# s.pop()
+# s.pop()
+# s.pop()
+# s.pop()
+# s.pop()
+
+print(s.top())
 
 # s.pop()
 print (s.isEmpty())

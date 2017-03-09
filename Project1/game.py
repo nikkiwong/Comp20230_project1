@@ -1,4 +1,4 @@
-from Stack import *
+from Stack_linkedlist import *
 
 class Board(list):
 
@@ -10,27 +10,33 @@ class Game(object):
     MARKER_X = "X"
     MARKER_G = "G"
     MARKER_O = "O"
-    START = [0, 4]
-    GOAL = [4, 0]
-    default = [["O"] * 5 for _ in range (5)]
+    START = [0, 7]
+    GOAL = [7, 0]
+    default = [["O"] * 8 for _ in range (8)]
     count = 0
-
-    def size(self, n):
-        self.n=n
-        return self.n
 
     def __init__(self):
         self.flag = True
         self.arena = Board(Game.default)
         self.curr_pos = Game.START[:]
         self.prev_pos = Game.START[:]
-        self.arena[0][4] = Game.MARKER_G
+        self.arena[0][7] = Game.MARKER_G
         self.move_player()
+        self.arena[1][3] = "*"
+        self.arena[1][4] = "*"
+        self.arena[1][5] = "*"
+        self.arena[1][6] = "*"
+        self.arena[1][7] = "*"
+        self.arena[3][2] = "*"
+        self.arena[4][2] = "*"
+        self.arena[5][2] = "*"
+        self.arena[6][2] = "*"
+        self.arena[7][2] = "*"
 
     def move_player(self):
         px, py = self.prev_pos
         cx, cy = self.curr_pos
-        if (-1 < cx < 5) and (-1 < cy < 5):
+        if (-1 < cx < 8) and (-1 < cy < 8):
             self.arena[py][px] = Game.MARKER_O
             self.arena[cy][cx] = Game.MARKER_X
             # self.arena[0][4] = Game.MARKER_G
@@ -58,12 +64,12 @@ class Game(object):
                 self.prev_pos = self.curr_pos[:]
                 self.curr_pos[0] = self.curr_pos[0] + 1
                 self.move_player()
-            if self.curr_pos[0]==4:
-                if self.curr_pos==Game.GOAL:
-                    print("You've reached the goal!")
-                    Game.count+=1
-                    print(Game.count)
-                    self.flag=False
+            # if self.curr_pos[0]==4:
+            if self.curr_pos==Game.GOAL:
+                print("You've reached the goal!")
+                Game.count+=1
+                print(Game.count)
+                self.flag=False
 
     def printArena(self):
         print(str(self.arena))
@@ -71,3 +77,4 @@ class Game(object):
 
 my_game = Game()
 my_game.play()
+
