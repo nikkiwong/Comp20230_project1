@@ -109,8 +109,8 @@ class Stack:
     def peek(self):
         #peeks at the 2nd node in the linked list
         return self.__list.getNth(1)
-#
-#
+
+
 # s = Stack()
 # s.push([0, 7])
 #
@@ -127,16 +127,16 @@ class Stack:
 # s.push("go south")
 # s.pop()
 # s.pop()
-# s.pop()
-# s.pop()
-# s.pop()
-# s.pop()
-# s.pop()
-# s.pop()
+# # s.pop()
+# # s.pop()
+# # s.pop()
+# # s.pop()
+# # s.pop()
+# # s.pop()
 # #
 # print(s.top())
 #
 # # s.pop()
 # print (s.isEmpty())
-# # print(s)
+# print(s)
 # print(s.peek())
