@@ -1,9 +1,10 @@
 import numpy as np
 from Stack_linkedlist import Stack
-
+import sys
 
 class Game(object):
-
+    # This is an automated robot where he roams the world
+    # automatically without the need for any input
     MARKER_X = "X"
     MARKER_G = "G"
     MARKER_V = "V"
@@ -22,11 +23,8 @@ class Game(object):
         default[1][6] = "*"
         default[1][7] = "*"
 
+        #this wall blocks the goal from being reached
         # default[0][6] = "*"
-        # default[1][1] = "*"
-
-        # default[0][1] = "*"
-        # default[1][1] = "*"
 
         default[3][2] = "*"
         default[4][2] = "*"
@@ -41,7 +39,9 @@ class Game(object):
         self.r2d2 = Game.START
         self.size = s
         self.arena = self.create_word(self.size)
+        print(str(self.arena))
         self.find_path()
+
 
 
 
@@ -124,7 +124,9 @@ class Game(object):
             self.move_robot(self.r2d2[0], self.r2d2[1])
         #if the robot location and the goal location is the same then print out you have found the goal!!
         if self.r2d2 == self.goal:
+            print(" ")
             print("You have found the goal!")
+            print (" ")
             print(str(self.arena))
             return True
         #otherwise, check if the current location of the robot is valid, this is
@@ -156,7 +158,9 @@ class Game(object):
                 self.move_robot(self.r2d2[0], self.r2d2[1])
                 return self.find_path()
             if Game.sa.size() == 1:
+                print(" ")
                 print("The are no possible paths to reach the goal. :( ")
+                print(" ")
                 print(str(self.arena))
                 return False
             else:
@@ -165,13 +169,11 @@ class Game(object):
 
 
     def goal_reached(self):
-        if self.r2d2==self.goal:
-            return True
+        # print(self.r2d2, self.goal)
+        return self.r2d2==self.goal
 
     def __repr__(self):
         return self.arena.__repr__()
 
-#
 A = Game(8)
-print(A.where_is_robot())
 A
