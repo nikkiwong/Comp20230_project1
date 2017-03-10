@@ -1,6 +1,5 @@
 import numpy as np
 from Stack_linkedlist import Stack
-import sys
 
 class Game(object):
     # This is an automated robot where he roams the world
@@ -11,7 +10,7 @@ class Game(object):
     MARKER_1 = "1"
     count = 0
     sa = Stack()
-    GOAL = [7, 7]
+    GOAL = [7, 0]
     START = [0, 7]
 
     def create_word(self, s):
@@ -26,8 +25,6 @@ class Game(object):
         #this wall blocks the goal from being reached
         # default[0][6] = "*"
 
-        # default[7][6] = "*"
-        default[6][7] = "*"
 
         default[3][2] = "*"
         default[4][2] = "*"
@@ -52,73 +49,53 @@ class Game(object):
         return self.r2d2
 
     def is_feasible(self, x, y):
-        # pass
-        # print(" ")
-        # print self.arena[x][y]
-        # print("is feasible ", y, x)
 
+        #tests whether the next path taken is feasible by the robot
         if x < 0 or x >= self.size or y < 0 or y >= self.size:
-            # print("We have exceeded boundary")
-            # print("Return false")
             return False
 
         elif self.arena[x][y] == "*" or self.arena[x][y] == "V" or self.arena[x][y] == "1":
-            # print("We have hit a wall")
-            # print("return false")
             return False
 
         else:
-            # print("return True")
             return True
 
-    # def co_ords(self, x, y):
-
     def move_robot(self, cx, cy):
-        # #get oo-ordinates for the goal, previous position and the robots position
-        # print(Game.sa)
+        #cx and cy are updated all the time after a path returns True from is_feasible
+        #in this function the world is updated to show where the robot is in relation to the goal
         gx, gy = self.goal
-        # cx, cy = self.r2d2
-        # Game.sa.push([cx, cy])
-        # px, py = Game.sa.peek()
-        # print(Game.sa)
-        # print(" ")
-        # print("previous: ", px, py)
-        #
-        # print("robot: ", (cx, cy))
-        # print("robot: ", self.r2d2)
-        # print("top: ", Game.sa.top())
 
         if (-1 < cx < self.size) and (-1 < cy < self.size) and self.arena[cy][cx] == "O" or self.arena[cy][cx] == "G":
+
             Game.sa.push([cx, cy])
-            # print("inside loop:", cx, cy)
             px, py = Game.sa.peek()
-            # print("previous: ", px, py)
+
             self.arena[py][px] = Game.MARKER_1
             self.arena[gy][gx] = Game.MARKER_G
             self.arena[cy][cx] = Game.MARKER_X
-            # print(str(self.arena))
-            # print(" ")
+
+            print(" ")
+            print(str(self.arena))
+            print(" ")
 
         else:
-            # print(Game.sa)
-            # print(str(self.arena))
-            # print(" ")
             bx, by = Game.sa.top()
-            # print("Game top: ", bx, by)
             if (-1 < cx < self.size) and (-1 < cy < self.size) and self.arena[cy][cx]!="*":
                 self.arena[by][bx] = Game.MARKER_V
-            Game.sa.pop()
-            cx, cy = Game.sa.top()
 
+            Game.sa.pop()
+            #the location that was under the one that's just popped is now marked as the current location
+            cx, cy = Game.sa.top()
             self.arena[cy][cx] = Game.MARKER_X
-            # print("after pop top: ", cx, cy)
-            # print("robot", cx, cy)
+            #assigning the new co-ordinates to the robot
             self.r2d2[0] = cx
             self.r2d2[1] = cy
-            # print("r2d2 after pop", self.r2d2)
+            #setting the previous location
             px, py = Game.sa.peek()
-            # self.move_robot()
-            # print(str(self.arena))
+
+            print(" ")
+            print(str(self.arena))
+            print(" ")
 
 
     def find_path(self):
@@ -132,40 +109,35 @@ class Game(object):
             print (" ")
             print(str(self.arena))
             return True
-        #otherwise, check if the current location of the robot is valid, this is
-        # elif self.r2d2 == "X":
-        #     print("no path")
-        #     if self.is_feasible(self.r2d2[1] - 1, self.r2d2[0])==False:
-        #         print("No path to goal.")
-        #     return False
 
         else:
-            # print("robot: ", self.r2d2)
-            # print("game top: ", Game.sa.top())
-            # print("game size: ", Game.sa.size())
             if self.is_feasible(self.r2d2[1]-1,self.r2d2[0])==True:
-                # self.move_robot()
                 self.r2d2[1]-=1
                 self.move_robot(self.r2d2[0], self.r2d2[1])
                 return self.find_path()
+
             if self.is_feasible(self.r2d2[1], self.r2d2[0]+1) == True:
                 self.r2d2[0]+=1
                 self.move_robot(self.r2d2[0], self.r2d2[1])
                 return self.find_path()
+
             if self.is_feasible(self.r2d2[1]+1, self.r2d2[0]) == True:
                 self.r2d2[1]+=1
                 self.move_robot(self.r2d2[0], self.r2d2[1])
                 return self.find_path()
+
             if self.is_feasible(self.r2d2[1], self.r2d2[0]-1) == True:
                 self.r2d2[0]-=1
                 self.move_robot(self.r2d2[0], self.r2d2[1])
                 return self.find_path()
+            #when all possible paths have been exhausted
             if Game.sa.size() == 1:
                 print(" ")
                 print("The are no possible paths to reach the goal. :( ")
                 print(" ")
                 print(str(self.arena))
                 return False
+
             else:
                 self.move_robot(self.r2d2[0], self.r2d2[1])
                 return self.find_path()
@@ -178,5 +150,7 @@ class Game(object):
     def __repr__(self):
         return self.arena.__repr__()
 
-A = Game(8)
-A
+
+#to start the robot just call the class and enter the size of the world inside the parenthesis
+# A = Game(8)
+# A
