@@ -11,7 +11,7 @@ def test (did_pass):
 
 def tests_simple():
  #Create the world
-    G.create_world ( " world1 . dat" )
+    G.create_world(8)
 #basic tests
 test(G.where_is_robot() == (7 , 0))
 test(G.is_feasible((1, 0)))

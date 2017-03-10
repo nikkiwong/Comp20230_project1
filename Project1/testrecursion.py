@@ -8,6 +8,9 @@ class Game(object):
     MARKER_G = "G"
     MARKER_V = "V"
     MARKER_1 = "1"
+    count = 0
+    sa = Stack()
+
     size = 8
     default = [["O"] * size for n in range(size)]
     default[1][3] = "*"
@@ -27,11 +30,8 @@ class Game(object):
     default[5][2] = "*"
     default[6][2] = "*"
     default[7][2] = "*"
-    GOAL = [7, 0]
+    GOAL = [7, 3]
     START = [0, 7]
-    count = 0
-    sa = Stack()
-
 
     def __init__(self):
         self.flag = True
@@ -49,16 +49,17 @@ class Game(object):
     def is_feasible(self, x, y):
         # pass
         print(" ")
-        print self.arena[x][y]
+        # print self.arena[x][y]
         print("is feasible ", y, x)
-        if self.arena[x][y] == "*" or self.arena[x][y] == "V" or self.arena[x][y] == "1":
-            print("We have hit a wall")
-            print("return false")
-            return False
 
-        elif x < 0 or x >= Game.size or y < 0 or y >= Game.size:
+        if x < 0 or x >= Game.size or y < 0 or y >= Game.size:
             print("We have exceeded boundary")
             print("Return false")
+            return False
+
+        elif self.arena[x][y] == "*" or self.arena[x][y] == "V" or self.arena[x][y] == "1":
+            print("We have hit a wall")
+            print("return false")
             return False
 
         else:
@@ -152,15 +153,3 @@ class Game(object):
 A = Game()
 
 A
-# # print(A[1])
-# # print(B[0])
-# i=0
-# j=0
-#
-# for row in A.arena: #for each subset array in the array
-#     #use this to select the row
-#     # print("row: ", row[0]) #prints each row starting from top
-#     for elem in row: #for each element in the array
-#         # while i<len(grid[i]) and j<len(grid[i]):
-#         if elem == "O": #prints out value of col, not the co-ordinates
-#             print("we have empty space")
