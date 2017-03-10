@@ -11,7 +11,7 @@ class Game(object):
     MARKER_1 = "1"
     count = 0
     sa = Stack()
-    GOAL = [7, 0]
+    GOAL = [5, 5]
     START = [0, 7]
 
     def create_word(self, s):
