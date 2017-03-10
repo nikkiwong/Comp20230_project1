@@ -10,11 +10,15 @@ class Game(object):
     MARKER_1 = "1"
     size = 8
     default = [["O"] * size for n in range(size)]
-    default[0][0] = "*"
+    default[1][3] = "*"
     default[1][4] = "*"
     default[1][5] = "*"
     default[1][6] = "*"
     default[1][7] = "*"
+
+    default[0][1] = "*"
+    default[1][1] = "*"
+
     default[3][2] = "*"
     default[4][2] = "*"
     default[5][2] = "*"
@@ -43,15 +47,16 @@ class Game(object):
         # pass
         print self.arena[x][y]
         print ("is feasible ", y, x)
-        if self.arena[y][x] == "*" or self.arena[y][x] == "V" or self.arena[y][x] == 1:
+        if self.arena[x][y] == "*" or self.arena[x][y] == "V" or self.arena[x][y] == "1":
             print("We have hit a wall")
             print("return false")
-        elif (-1 < self.arena[x] < Game.size) and (-1 < self.arena[y] < Game.size):
+            return False
+
+        elif x < 0 or x >= Game.size or y < 0 or y >= Game.size:
             print("We have exceeded boundary")
             print("Return false")
-        elif (-1 < self.arena[x] < Game.size) and (-1 < self.arena[y] < Game.size):
-            print("We have exceeded boundary")
-            print("Return false")
+            return False
+
         else:
             print ("return True")
             return True
@@ -61,21 +66,23 @@ class Game(object):
         print(Game.sa)
         gx, gy = self.goal
         cx, cy = self.r2d2
-        Game.sa.push([cx, cy])
-        px, py = Game.sa.peek()
+        # Game.sa.push([cx, cy])
+        # px, py = Game.sa.peek()
+        print(Game.sa)
         print(" ")
-        print("previous: ", px, py)
+        # print("previous: ", px, py)
 
         print("robot: ", self.r2d2)
         print("top: ", Game.sa.top())
 
-        if (-1 < cx < Game.size) and (-1 < cy < Game.size) and self.arena[cy][cx] == "O" or self.arena[cy][cx] == "1":
-                self.arena[py][px] = Game.MARKER_1
-                self.arena[gy][gx] = Game.MARKER_G
-                self.arena[cy][cx] = Game.MARKER_X
-                print(str(self.arena))
-                print(" ")
-                # Game.sa.peek()
+        if (-1 < cx < Game.size) and (-1 < cy < Game.size) and self.arena[cy][cx] == "O" or self.arena[cy][cx] == "G":
+            Game.sa.push([cx, cy])
+            px, py = Game.sa.peek()
+            self.arena[py][px] = Game.MARKER_1
+            self.arena[gy][gx] = Game.MARKER_G
+            self.arena[cy][cx] = Game.MARKER_X
+            print(str(self.arena))
+            print(" ")
 
         else:
             print(Game.sa)
@@ -87,10 +94,7 @@ class Game(object):
                 self.arena[by][bx] = Game.MARKER_V
             Game.sa.pop()
             cx, cy = Game.sa.top()
-            # if self.arena[cy][cx]=="*":
-            #     print ("after pop wall", cx, cy)
-            #     Game.sa.pop()
-            #     cx, cy = Game.sa.top()
+
             self.arena[cy][cx] = Game.MARKER_X
             print("after pop top: ", cx, cy)
             print("robot", cx, cy)
@@ -101,74 +105,35 @@ class Game(object):
 
 
     def find_path(self):
+        print ("r2d2:", self.r2d2, "; goal: ", self.goal)
+        self.move_robot()
+        print ("r2d2:", self.r2d2, "; goal: ", self.goal)
         if self.r2d2 == self.goal:
             print("You have found the goal")
             return True
-        if r2d2[0]:
-
-
-        # self.move_robot()
-        #
-        # self.is_feasible(self.r2d2[1], self.r2d2[0])
-        # self.r2d2[1] = self.r2d2[1]-1
-        # # print(self.r2d2)
-        # print("going to move robot")
-        # self.move_robot()
-        #
-        # self.is_feasible(self.r2d2[1], self.r2d2[0])
-        # self.r2d2[1] = self.r2d2[1]-1
-        # print("going to move robot")
-        # self.move_robot()
-        #
-        # self.is_feasible(self.r2d2[1], self.r2d2[0])
-        # self.r2d2[1] = self.r2d2[1]-1
-        # print("going to move robot")
-        # self.move_robot()
-        #
-        # self.is_feasible(self.r2d2[1], self.r2d2[0])
-        # self.r2d2[1] = self.r2d2[1] - 1
-        # print("going to move robot")
-        # self.move_robot()
-        #
-        # self.is_feasible(self.r2d2[1], self.r2d2[0])
-        # self.r2d2[1] = self.r2d2[1] - 1
-        # print("going to move robot")
-        # self.move_robot()
-        #
-        # self.is_feasible(self.r2d2[1], self.r2d2[0])
-        # self.r2d2[1] = self.r2d2[1] - 1
-        # print("going to move robot")
-        # self.move_robot()
-        #
-        # self.is_feasible(self.r2d2[1], self.r2d2[0])
-        # self.r2d2[1] = self.r2d2[1] + 1
-        # print("r2d2: ", self.r2d2)
-        # print("going to move robot")
-        # self.move_robot()
-        #
-        # self.is_feasible(self.r2d2[1], self.r2d2[0])
-        # # print("across")
-        # # print(self.r2d2[0])
-        # self.r2d2[0] = self.r2d2[0] + 1
-        # print("r2d2: ", self.r2d2)
-        # print("across")
-        # self.move_robot()
-        #
-        # self.is_feasible(self.r2d2[1], self.r2d2[0])
-        # self.r2d2[0] = self.r2d2[0] + 1
-        #
-        # self.move_robot()
-        # self.is_feasible(self.r2d2[1], self.r2d2[0])
-        # self.r2d2[0] = self.r2d2[0] + 1
-        # print("r2d2: ", self.r2d2)
-        # print("across")
-        # self.move_robot()
-        #
-        # self.is_feasible(self.r2d2[1], self.r2d2[0])
-        # self.r2d2[0] = self.r2d2[0] + 1
-        #
-        # self.move_robot()
-
+        elif self.is_feasible(self.r2d2[1], self.r2d2[0])==False:
+            return False
+        else:
+            if self.is_feasible(self.r2d2[1]-1,self.r2d2[0])==True:
+                # self.move_robot()
+                self.r2d2[1] = self.r2d2[1] - 1
+                # self.move_robot()
+                return self.find_path()
+            if self.is_feasible(self.r2d2[1], self.r2d2[0]+1) == True:
+                self.r2d2[0] = self.r2d2[0] + 1
+                # self.move_robot()
+                return self.find_path()
+            if self.is_feasible(self.r2d2[1]+1, self.r2d2[0]) == True:
+                self.r2d2[1] = self.r2d2[1] + 1
+                # self.move_robot()
+                return self.find_path()
+            if self.is_feasible(self.r2d2[1], self.r2d2[0]-1) == True:
+                self.r2d2[0] = self.r2d2[0] - 1
+                # self.move_robot()
+                return self.find_path()
+            else:
+                self.move_robot()
+                return self.find_path()
 
     def __repr__(self):
         return self.arena.__repr__()
