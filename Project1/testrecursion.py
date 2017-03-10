@@ -121,8 +121,7 @@ class Game(object):
             print(str(self.arena))
             return True
 
-        while true:
-            self.r2d2!=self.goal:
+        while True:
             print("robot: ", self.r2d2)
             print("self:", self.r2d2 ,"goal:", self.goal)
 
@@ -154,41 +153,39 @@ class Game(object):
                     self.move_robot(self.r2d2[0], self.r2d2[1])
                     return self.find_path()
             else:
-                break
 
+                if self.is_feasible(self.r2d2[1]-1,self.r2d2[0])==True:
+                    # self.move_robot()
+                    self.r2d2[1]-=1
+                    self.move_robot(self.r2d2[0], self.r2d2[1])
+                    return self.find_path()
 
-            if self.is_feasible(self.r2d2[1]-1,self.r2d2[0])==True:
-                # self.move_robot()
-                self.r2d2[1]-=1
-                self.move_robot(self.r2d2[0], self.r2d2[1])
-                return self.find_path()
+                if self.is_feasible(self.r2d2[1], self.r2d2[0]+1) == True:
+                    self.r2d2[0]+=1
+                    self.move_robot(self.r2d2[0], self.r2d2[1])
+                    return self.find_path()
 
-            if self.is_feasible(self.r2d2[1], self.r2d2[0]+1) == True:
-                self.r2d2[0]+=1
-                self.move_robot(self.r2d2[0], self.r2d2[1])
-                return self.find_path()
+                if self.is_feasible(self.r2d2[1]+1, self.r2d2[0]) == True:
+                    self.r2d2[1]+=1
+                    self.move_robot(self.r2d2[0], self.r2d2[1])
+                    return self.find_path()
 
-            if self.is_feasible(self.r2d2[1]+1, self.r2d2[0]) == True:
-                self.r2d2[1]+=1
-                self.move_robot(self.r2d2[0], self.r2d2[1])
-                return self.find_path()
+                if self.is_feasible(self.r2d2[1], self.r2d2[0]-1) == True:
+                    self.r2d2[0]-=1
+                    self.move_robot(self.r2d2[0], self.r2d2[1])
+                    return self.find_path()
 
-            if self.is_feasible(self.r2d2[1], self.r2d2[0]-1) == True:
-                self.r2d2[0]-=1
-                self.move_robot(self.r2d2[0], self.r2d2[1])
-                return self.find_path()
+                if Game.sa.size() == 1:
+                    print(" ")
+                    print("The are no possible paths to reach the goal. :( ")
+                    print(" ")
+                    print(str(self.arena))
+                    return False
 
-            if Game.sa.size() == 1:
-                print(" ")
-                print("The are no possible paths to reach the goal. :( ")
-                print(" ")
-                print(str(self.arena))
-                return False
-
-            else:
-                print ("stuck")
-                self.move_robot(self.r2d2[0], self.r2d2[1])
-                return self.find_path()
+                else:
+                    print ("stuck")
+                    self.move_robot(self.r2d2[0], self.r2d2[1])
+                    return self.find_path()
         #
 
 
