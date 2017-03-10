@@ -21,7 +21,7 @@ class Node(object):
 
     def __repr__(self):
         return str(self.get_value())
-        # return "node: " + str(self.get_value())
+    #     # return "node: " + str(self.get_value())
 
 class LinkedList(object):
     """ The List itself
@@ -54,14 +54,13 @@ class LinkedList(object):
     def getNth(self, index):
         current = self.__first  # Initialise temp
         if current == None:
-            return []
+            self.__first = []
         else:
             count = 0  # Index of current node
             # Loop while end of linked list is not reached
             while (current):
                 if (count == index):
                     result = current
-                    print(result)
                     return result
                 count += 1
                 current = current.get_next()
@@ -110,7 +109,7 @@ class Stack:
         #peeks at the 2nd node in the linked list
         return self.__list.getNth(1)
 
-
+#
 # s = Stack()
 # s.push([0, 7])
 #
@@ -127,16 +126,16 @@ class Stack:
 # s.push("go south")
 # s.pop()
 # s.pop()
-# # s.pop()
+# s.pop()
 # # s.pop()
 # # s.pop()
 # # s.pop()
 # # s.pop()
 # # s.pop()
 # #
-# print(s.top())
+# s.top()
 #
 # # s.pop()
 # print (s.isEmpty())
 # print(s)
-# print(s.peek())
+# s.peek()
