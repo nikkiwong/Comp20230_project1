@@ -11,7 +11,7 @@ class Game(object):
     MARKER_1 = "1"
     count = 0
     sa = Stack()
-    GOAL = [5, 5]
+    GOAL = [7, 7]
     START = [0, 7]
 
     def create_word(self, s):
@@ -25,6 +25,9 @@ class Game(object):
 
         #this wall blocks the goal from being reached
         # default[0][6] = "*"
+
+        # default[7][6] = "*"
+        default[6][7] = "*"
 
         default[3][2] = "*"
         default[4][2] = "*"
