@@ -35,30 +35,30 @@ class Stack:
     def __repr__(self):
         return self.__array.__repr__()
 #
-# s = Stack()
-# s.push("GO north")
-#
-# s.push("Go North")
-# s.push("Go north")
-# s.push("go NOrth")
-# s.pop() # ater you pop, you mark the cell to show you've been there?
-# s.push("go east")
-# s.push("go east")
+s = Stack()
+s.push("GO north")
+
+s.push("Go North")
+s.push("Go north")
+s.push("go NOrth")
+s.pop() # ater you pop, you mark the cell to show you've been there?
+s.push("go east")
+s.push("go east")
+s.pop()
+s.pop()
+s.push("go south")
+s.push("go south")
+s.push("go south")
+s.push("go south")
+s.pop()
+
+s.pop()
+s.pop()
+
+print(s.top())
 # s.pop()
-# s.pop()
-# s.push("go south")
-# s.push("go south")
-# s.push("go south")
-# s.push("go south")
-# s.pop()
-#
-# s.pop()
-# s.pop()
-#
-# print(s.top())
-# # s.pop()
-# print (s.isEmpty())
-# print(s)
-# print(s.pop())
-# print (s)
-# print(s.top())
+print (s.isEmpty())
+print(s)
+print(s.pop())
+print (s)
+print(s.top())

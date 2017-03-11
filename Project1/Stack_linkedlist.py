@@ -109,33 +109,33 @@ class Stack:
         #peeks at the 2nd node in the linked list
         return self.__list.getNth(1)
 
+
+s = Stack()
+s.push([0, 7])
+
+s.push("Go North")
+s.push("Go north")
+s.push("go NOrth")
+s.pop() # ater you pop, you mark the cell to show you've been there?
+s.push("go east")
+s.push("go east")
+s.pop()
+s.push("go south")
+s.push("go south")
+s.push("go south")
+s.push("go south")
+s.pop()
+s.pop()
+s.pop()
+# s.pop()
+# s.pop()
+# s.pop()
+# s.pop()
+# s.pop()
 #
-# s = Stack()
-# s.push([0, 7])
-#
-# s.push("Go North")
-# s.push("Go north")
-# s.push("go NOrth")
-# s.pop() # ater you pop, you mark the cell to show you've been there?
-# s.push("go east")
-# s.push("go east")
+print(s.top())
+
 # s.pop()
-# s.push("go south")
-# s.push("go south")
-# s.push("go south")
-# s.push("go south")
-# s.pop()
-# s.pop()
-# s.pop()
-# # s.pop()
-# # s.pop()
-# # s.pop()
-# # s.pop()
-# # s.pop()
-# #
-# s.top()
-#
-# # s.pop()
-# print (s.isEmpty())
-# print(s)
-# s.peek()
+print (s.isEmpty())
+print(s)
+print(s.peek())

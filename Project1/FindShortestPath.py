@@ -51,11 +51,11 @@ class Game(object):
     def is_feasible(self, x, y):
 
         if x < 0 or x >= self.size or y < 0 or y >= self.size:
-            print("We have exceeded boundary")
+            # print("We have exceeded boundary")
             return False
 
         elif self.arena[x][y] == "*" or self.arena[x][y] == "V" or self.arena[x][y] == "1":
-            print("We have hit a wall")
+            # print("We have hit a wall")
             return False
 
         else:

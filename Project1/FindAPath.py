@@ -70,9 +70,9 @@ class Game(object):
             self.arena[gy][gx] = Game.MARKER_G
             self.arena[cy][cx] = Game.MARKER_X
 
-            print(" ")
-            print(str(self.arena))
-            print(" ")
+            # print(" ")
+            # print(str(self.arena))
+            # print(" ")
 
         else:
             bx, by = Game.sa.top()
@@ -147,7 +147,7 @@ class Game(object):
         return self.arena.__repr__()
 
 
-size = int(input("Please enter size of your world: "))
-
-A = Game(size)
-A
+# size = int(input("Please enter size of your world: "))
+#
+# A = Game(size)
+# A
