@@ -25,7 +25,6 @@ class Game(object):
         #this wall blocks the goal from being reached
         # default[0][6] = "*"
 
-
         default[3][2] = "*"
         default[4][2] = "*"
         default[5][2] = "*"
@@ -41,9 +40,6 @@ class Game(object):
         self.arena = self.create_word(self.size)
         print(str(self.arena))
         self.find_path()
-
-
-
 
     def where_is_robot(self):
         return self.r2d2
@@ -151,6 +147,7 @@ class Game(object):
         return self.arena.__repr__()
 
 
-#to start the robot just call the class and enter the size of the world inside the parenthesis
-# A = Game(8)
-# A
+size = int(input("Please enter size of your world: "))
+
+A = Game(size)
+A

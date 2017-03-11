@@ -1,4 +1,4 @@
-from Grid import Game
+from FindAPath import Game
 import sys
 
 def test(did_pass):
